@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JetClientState">
+    <option name="folders">
+      <list>
+        <folderState>
+          <option name="id" value="7c0c332f-edb1-4cff-8abc-f47d0a0fe005" />
+          <option name="name" value="xpert-microservices" />
+          <option name="requests">
+            <list>
+              <requestState>
+                <option name="body">
+                  <bodyState>
+                    <option name="raw" value="{&#10;  &quot;firstName&quot;: &quot;nauman&quot;,&#10;  &quot;lastName&quot;: &quot;arif&quot;,&#10;  &quot;email&quot;: &quot;muhammad.nauman@gmail1.com&quot;&#10;}" />
+                    <option name="type" value="JSON" />
+                  </bodyState>
+                </option>
+                <option name="headers">
+                  <list>
+                    <headerState>
+                      <option name="key" value="Content-Type" />
+                      <option name="value" value="application/json" />
+                    </headerState>
+                  </list>
+                </option>
+                <option name="id" value="1674af89-4f98-40a5-991e-632663732438" />
+                <option name="method" value="POST" />
+                <option name="name" value="Save Customer" />
+                <option name="url" value="http://localhost:8080/v1/customer/register" />
+              </requestState>
+              <requestState>
+                <option name="body">
+                  <bodyState>
+                    <option name="raw" value="{&#10;  &quot;firstName&quot;: &quot;nauman&quot;,&#10;  &quot;lastName&quot;: &quot;arif&quot;,&#10;  &quot;email&quot;: &quot;muhammad.nauman@gmail.com&quot;&#10;}" />
+                    <option name="type" value="JSON" />
+                  </bodyState>
+                </option>
+                <option name="headers">
+                  <list>
+                    <headerState>
+                      <option name="key" value="Content-Type" />
+                      <option name="value" value="application/json" />
+                    </headerState>
+                  </list>
+                </option>
+                <option name="id" value="4349f3a0-6364-4ea9-9d23-db733d92c817" />
+                <option name="method" value="POST" />
+                <option name="name" value="Save Customer 1" />
+                <option name="url" value="http://localhost:8081/v1/fraud/check/1" />
+              </requestState>
+            </list>
+          </option>
+          <option name="sortWeight" value="1000000" />
+          <option name="syncProperties">
+            <synchronizationPropertiesState>
+              <option name="folderPath" value="$PROJECT_DIR$/.jetclient" />
+            </synchronizationPropertiesState>
+          </option>
+        </folderState>
+      </list>
+    </option>
+    <option name="id" value="44977c31-7f71-4c97-a138-f99d92cfee23" />
+  </component>
+</project>
