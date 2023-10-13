@@ -13,7 +13,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - postgres  # Define the network here
+      - postgres
     restart: unless-stopped
 
   pgadmin:
@@ -45,6 +45,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - spring
 
   eureka-server:
     image: hmnauman91/eureka-server:latest
@@ -70,6 +72,50 @@ services:
     depends_on:
       - eureka-server
       - zipkin
+
+  customer:
+    image: hmnauman91/customer
+    container_name: customer
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - postgres
+      - spring
+    depends_on:
+      - eureka-server
+      - zipkin
+      - rabbitmq
+
+  fraud:
+    image: hmnauman91/fraud
+    container_name: fraud
+    ports:
+      - "8081:8081"
+    networks:
+      - spring
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka-server
+      - zipkin
+
+  notification:
+    image: hmnauman91/notification
+    container_name: notification
+    ports:
+      - "8086:8086"
+    networks:
+      - spring
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka-server
+      - zipkin
+      - rabbitmq
 
 networks:
   postgres:  # Define the network here
