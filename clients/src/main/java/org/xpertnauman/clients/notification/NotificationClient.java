@@ -11,6 +11,7 @@ import org.xpertnauman.clients.notification.response.NotificationResponse;
  * Created on 12/10/2023.
  */
 @FeignClient(
+        url = "${NOTIFICATION_SERVICE_URL:http://localhost:8086}",
         name = "notification",
         path = "v1/notification"
 )

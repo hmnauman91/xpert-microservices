@@ -5,9 +5,9 @@ spring:
   application:
     name: customer
   datasource:
-    url: jdbc:postgresql://postgres:5432/customer
-    username: xpertnauman
-    password: xpertnauman
+    url: jdbc:postgresql://${POSTGRES_HOST_NAME:postgres}:5432/customer
+    username: ${PG_USER_NAME:xpertnauman}
+    password: ${PG_PASSWORD:xpertnauman}
   jpa:
     properties:
       hibernate:
@@ -17,16 +17,16 @@ spring:
       ddl-auto: create-drop
       show_sql: true
   zipkin:
-    base-url: http://zipkin:9411
+    base-url: http://${ZIPKIN_IP:zipkin}:9411/
 
 logging:
   level:
     org.hibernate.SQL: DEBUG
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-server:8761/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://${EUREKA_SERVER_IP:eureka-server}:8761/eureka-server
 
 rabbitmq:
   topic-exchanges:
@@ -34,4 +34,3 @@ rabbitmq:
   routing-keys:
     name:
       notification: notification.routing.key
-

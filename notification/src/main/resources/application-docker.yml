@@ -15,8 +15,6 @@ spring:
       show_sql: true
   zipkin:
     base-url: http://zipkin:9411
-  rabbitmq:
-    addresses: amqp://rabbitmq:5672
 
 server:
   port: 8086

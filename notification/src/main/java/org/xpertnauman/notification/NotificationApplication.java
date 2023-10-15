@@ -3,18 +3,16 @@ package org.xpertnauman.notification;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
         (
                 scanBasePackages = {
-                        "org.xpertnauman.notification",
-                        "org.xpertnauman.amqp"
+                        "org.xpertnauman.notification"
 
                 }
         )
-@EnableEurekaClient
+//@EnableEurekaClient
 @EnableFeignClients(
         basePackages = "org.xpertnauman.clients"
 )

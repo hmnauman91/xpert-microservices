@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.xpertnauman.amqp.RabbitMQMessageProducer;
 import org.xpertnauman.clients.fraud.FraudClient;
 import org.xpertnauman.clients.fraud.response.FraudCheckResponse;
+import org.xpertnauman.clients.notification.NotificationClient;
 import org.xpertnauman.clients.notification.request.NotificationRequest;
 import org.xpertnauman.customer.config.CustomerConfig;
 import org.xpertnauman.customer.entity.Customer;
@@ -22,7 +22,7 @@ public class CustomerServiceImpl implements CustomerService
     private final CustomerConfig customerConfig;
     private final CustomerRepository customerRepository;
     private final FraudClient fraudClient;
-    private final RabbitMQMessageProducer messageProducer;
+    private final NotificationClient notificationClient;
 
     @Transactional
     @Override
@@ -51,14 +51,21 @@ public class CustomerServiceImpl implements CustomerService
             if(fraudCheckResponse != null && fraudCheckResponse.isFraudster())
                 throw new IllegalStateException("fraudster");
 
-            messageProducer.publish(NotificationRequest.builder()
+            notificationClient.sendNotification(NotificationRequest.builder()
+                            .toCustomerId(saved.getId())
+                            .toCustomerEmail(saved.getEmail())
+                            .sender("xpertnauman")
+                            .message(String.format("Hi %s you have registered successfully", saved.getFirstName()))
+                            .build());
+
+            /*messageProducer.publish(NotificationRequest.builder()
                     .toCustomerId(saved.getId())
                     .toCustomerEmail(saved.getEmail())
                     .sender("xpertnauman")
                     .message(String.format("Hi %s you have registered successfully", saved.getFirstName()))
                     .build(),
                     customerConfig.getTopicExchangeName(),
-                    customerConfig.getNotificationRoutingKey());
+                    customerConfig.getNotificationRoutingKey());*/
 
         }
         else

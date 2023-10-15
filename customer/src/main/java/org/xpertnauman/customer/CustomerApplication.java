@@ -2,16 +2,14 @@ package org.xpertnauman.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication(
         scanBasePackages = {
-                "org.xpertnauman.customer",
-                "org.xpertnauman.amqp"
+                "org.xpertnauman.customer"
         }
 )
-@EnableEurekaClient
+//@EnableEurekaClient
 @EnableFeignClients(
         basePackages = "org.xpertnauman.clients"
 )

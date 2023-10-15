@@ -74,12 +74,20 @@ services:
       - zipkin
 
   customer:
-    image: hmnauman91/customer
+    image: hmnauman91/customer:1.0.1-SNAPSHOT
     container_name: customer
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=aws
+      - EUREKA_SERVER_IP=13.126.112.247
+      - FRAUD_SERVICE_URL=http://13.233.103.24:8081
+      - NOTIFICATION_SERVICE_URL=http://52.66.234.110:8086
+      - PG_PASSWORD=xpertnauman
+      - PG_USER_NAME=postgres
+      - POSTGRES_HOST_NAME=xpertmicroservices-dbinstance.c669qmefbqgk.ap-south-1.rds.amazonaws.com
+      - RABBITMQ_IP=3.111.46.162
+      - ZIPKIN_IP=3.111.46.162
     networks:
       - postgres
       - spring
@@ -89,7 +97,7 @@ services:
       - rabbitmq
 
   fraud:
-    image: hmnauman91/fraud
+    image: hmnauman91/fraud:1.0.0-SNAPSHOT
     container_name: fraud
     ports:
       - "8081:8081"
@@ -97,13 +105,19 @@ services:
       - spring
       - postgres
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=aws
+      - EUREKA_SERVER_IP=13.126.112.247
+      - NOTIFICATION_SERVICE_URL=http://52.66.234.110:8086
+      - PG_PASSWORD=xpertnauman
+      - PG_USER_NAME=postgres
+      - POSTGRES_HOST_NAME=xpertmicroservices-dbinstance.c669qmefbqgk.ap-south-1.rds.amazonaws.com
+      - RABBITMQ_IP=3.111.46.162
+      - ZIPKIN_IP=3.111.46.162
     depends_on:
-      - eureka-server
       - zipkin
 
   notification:
-    image: hmnauman91/notification
+    image: hmnauman91/notification:1.0.0-SNAPSHOT
     container_name: notification
     ports:
       - "8086:8086"
@@ -111,7 +125,13 @@ services:
       - spring
       - postgres
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=aws
+      - EUREKA_SERVER_IP=13.126.112.247
+      - PG_PASSWORD=xpertnauman
+      - PG_USER_NAME=postgres
+      - POSTGRES_HOST_NAME=xpertmicroservices-dbinstance.c669qmefbqgk.ap-south-1.rds.amazonaws.com
+      - RABBITMQ_IP=3.111.46.162
+      - ZIPKIN_IP=3.111.46.162
     depends_on:
       - eureka-server
       - zipkin

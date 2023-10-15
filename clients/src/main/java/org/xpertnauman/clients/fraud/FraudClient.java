@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.xpertnauman.clients.fraud.response.FraudCheckResponse;
 
 @FeignClient(
+        url = "${FRAUD_SERVICE_URL:http://localhost:8081}",
         value = "fraud",
         path = "v1/fraud")
 public interface FraudClient
 {
     @GetMapping(value = "check/{customerId}")
-    FraudCheckResponse checkIsFraudster(@PathVariable("customerId") Long customerId);
+    FraudCheckResponse  checkIsFraudster(@PathVariable("customerId") Long customerId);
 }
