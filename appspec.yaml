@@ -1,0 +1,10 @@
+version: 1.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:ap-south-1:231838012881:task/xpertnauman-microservices-cluster/0129f776e13b48e2b17dbd8b21754191"
+        LoadBalancerInfo:
+          ContainerName: "customer"
+          ContainerPort: "8080"
+        PlatformVersion: "LATEST"
