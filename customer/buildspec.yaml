@@ -18,8 +18,9 @@ phases:
       #- mvn clean package -Ddockerfile.skip
       - echo Executing command mvn clean package
       - mvn clean package
+      - mvn clean package -pl customer -am
       - echo Executing command mvn clean install
-      - mvn clean install
+      - mvn clean install -pl customer -am
       #- docker build --tag $IMAGE_URI .
   post_build:
     commands:
@@ -27,7 +28,7 @@ phases:
       - echo Build completed on `date`
       - echo $(docker images)
       - echo Pushing docker image
-      - mvn clean package -P build-docker-image
+      - mvn clean package -P build-docker-image -pl customer -am
       #- docker push $IMAGE_URI
       - echo push completed
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $IMAGE_URI > imagedefinitions.json
